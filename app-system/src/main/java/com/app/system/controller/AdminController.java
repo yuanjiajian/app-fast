@@ -1,6 +1,7 @@
 package com.app.system.controller;
 
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.app.system.entity.Admin;
 import com.app.system.entity.PageParam;
@@ -12,6 +13,7 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +38,19 @@ public class AdminController {
         return "admin/list";
     }
 
+    @GetMapping("/edit.html")
+    public String edit(Integer id, Model model) {
+        Admin admin = new Admin();
+        if (ObjectUtil.isNull(id)) {
+            admin.setStatus(0);
+            model.addAttribute("admin", admin);
+        } else {
+            admin = adminService.getById(id);
+            model.addAttribute("admin", admin);
+        }
+        return "admin/edit";
+    }
+
     @GetMapping("/list")
     @ResponseBody
     public Result list(String name, PageParam pageParam) {
@@ -52,7 +67,7 @@ public class AdminController {
     @PostMapping("/update_status")
     @ResponseBody
     public Result update_status(@RequestParam("ids") List<Integer> ids, Integer status) {
-        List<Admin> adminList = adminService.update_status(ids,status);
+        List<Admin> adminList = adminService.update_status(ids, status);
         return Result.success(adminList);
     }
 
