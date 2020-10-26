@@ -12,13 +12,9 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -55,19 +51,10 @@ public class AdminController {
 
     @PostMapping("/update_status")
     @ResponseBody
-    public Result update_status(Integer id, Integer status) {
-        Admin admin = adminService.getById(id);
-        admin.setStatus(status);
-        admin.setUpdateTime(LocalDateTime.now());
-        adminService.updateById(admin);
-        return Result.success(admin);
+    public Result update_status(@RequestParam("ids") List<Integer> ids, Integer status) {
+        List<Admin> adminList = adminService.update_status(ids,status);
+        return Result.success(adminList);
     }
 
-    @PostMapping("/update")
-    @ResponseBody
-    public Result update(@Validated Admin admin) {
-        adminService.updateById(admin);
-        return Result.success();
-    }
 }
 
