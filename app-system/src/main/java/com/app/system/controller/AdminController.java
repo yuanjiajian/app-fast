@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +47,7 @@ public class AdminController {
             model.addAttribute("admin", admin);
         } else {
             admin = adminService.getById(id);
+            admin.setPassword(null);
             model.addAttribute("admin", admin);
         }
         return "admin/edit";
@@ -62,6 +64,26 @@ public class AdminController {
         }
         Page<Admin> adminPage = adminService.page(page, new QueryWrapper<Admin>().like(StrUtil.isNotBlank(name), "name", name));
         return Result.success(adminPage);
+    }
+
+    @PostMapping("/add")
+    public Result add(@Validated Admin admin) {
+        adminService.save(admin);
+        return Result.success();
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public Result delete(@RequestParam("ids") List<Integer> ids) {
+        adminService.removeByIds(ids);
+        return Result.success();
+    }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public Result update(@Validated Admin admin) {
+        adminService.updateById(admin);
+        return Result.success();
     }
 
     @PostMapping("/update_status")

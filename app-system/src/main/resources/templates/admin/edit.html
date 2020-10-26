@@ -59,7 +59,7 @@
 
                         <div class="form-group col-md-12">
                             <label for="sort">排序</label>
-                            <input type="text" class="form-control" id="sort" name="sort" th:value="${admin.sort}" />
+                            <input type="number" class="form-control" id="sort" name="sort" th:value="${admin.sort}" />
                         </div>
                         <div class="form-group col-md-12">
                             <label for="status">状态</label>
@@ -91,5 +91,6 @@
 <!--标签插件-->
 <script th:src="@{/js/jquery-tags-input/jquery.tagsinput.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/admin/edit.js}"></script>
 </body>
 </html>

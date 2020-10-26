@@ -82,7 +82,7 @@ public class Admin implements Serializable {
     private Integer deleted;
 
     /**
-     * 创建日期
+     * 创建时间
      */
     private LocalDateTime createTime;
 
