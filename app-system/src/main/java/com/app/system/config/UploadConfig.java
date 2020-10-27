@@ -9,10 +9,6 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "upload")
 public class UploadConfig {
     private String path;
+    private String url;
     private String pattern;
-
-    public String getPath() {
-        return System.getProperty("user.dir")+path;
-    }
-
 }

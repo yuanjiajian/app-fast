@@ -61,7 +61,7 @@ public class AdminController {
 
     @GetMapping("/list")
     @ResponseBody
-    public Result list(String name,@Validated PageParam pageParam) {
+    public Result list(String name, @Validated PageParam pageParam) {
         Page<Admin> page = new Page<>(pageParam.getPage(), pageParam.getLimit());
         if (pageParam.getSortOrder().equalsIgnoreCase(SortOrderEnum.ASC.getDesc())) {
             page.addOrder(OrderItem.asc(pageParam.getSort()));

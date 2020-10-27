@@ -13,6 +13,9 @@
     <!--标签插件-->
     <link rel="stylesheet" th:href="@{/js/jquery-tags-input/jquery.tagsinput.min.css}">
     <link th:href="@{/css/style.min.css}" rel="stylesheet">
+    <!--对话框-->
+    <link rel="stylesheet" th:href="@{/js/jconfirm/jquery-confirm.min.css}">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid p-t-15">
@@ -45,8 +48,8 @@
                                         <figure>
                                             <img th:src="${admin.avatar}" alt="图片一">
                                             <figcaption>
-                                                <a class="btn btn-round btn-square btn-primary" href="#!"><i class="mdi mdi-eye"></i></a>
-                                                <a class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
+                                                <a onclick="eyePic(this)" class="btn btn-round btn-square btn-primary" href="#!"><i class="mdi mdi-eye"></i></a>
+                                                <a onclick="deletePic(this)" class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
                                             </figcaption>
                                         </figure>
                                     </li>
@@ -93,6 +96,9 @@
 <script type="text/javascript" th:src="@{/js/lightyear.js}"></script>
 <!--标签插件-->
 <script th:src="@{/js/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+<!--对话框-->
+<script th:src="@{/js/jconfirm/jquery-confirm.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.min.js}"></script>
 <script th:inline="javascript" type="text/javascript">
     var ctxPath = /*[[@{/}]]*/'';
