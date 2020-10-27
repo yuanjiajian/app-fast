@@ -17,9 +17,6 @@ public class Result {
         return new Result();
     }
 
-    public static Result success(String message) {
-        return new Result(ResultEnum.SUCCESS.getCode(), message, null);
-    }
 
     public static Result success(Object data) {
         return new Result(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getDesc(), data);

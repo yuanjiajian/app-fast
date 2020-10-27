@@ -41,7 +41,7 @@
                             <div class="form-controls">
 
                                 <ul class="list-inline clearfix lyear-uploads-pic">
-                                    <li class="col-xs-4 col-sm-3 col-md-2">
+                                    <li class="col-xs-4 col-sm-3 col-md-2" th:if="${admin.avatar!=null}">
                                         <figure>
                                             <img th:src="${admin.avatar}" alt="图片一">
                                             <figcaption>
@@ -51,7 +51,7 @@
                                         </figure>
                                     </li>
                                     <li class="col-xs-4 col-sm-3 col-md-2">
-                                        <a class="pic-add" id="add-pic-btn" href="#!" title="点击上传"></a>
+                                        <a class="pic-add" id="add-pic-btn" href="#!" title="点击上传" onclick="uploadAvatar(this)"><input type="file" accaccept=".png,.jpg,.jpeg,.bmp,.gif" class="hidden" /></a>
                                     </li>
                                 </ul>
                             </div>
@@ -88,9 +88,15 @@
 
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<!--消息提示-->
+<script th:src="@{/js/bootstrap-notify.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/lightyear.js}"></script>
 <!--标签插件-->
 <script th:src="@{/js/jquery-tags-input/jquery.tagsinput.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+<script th:inline="javascript" type="text/javascript">
+    var ctxPath = /*[[@{/}]]*/'';
+</script>
 <script type="text/javascript" th:src="@{/js/admin/edit.js}"></script>
 </body>
 </html>

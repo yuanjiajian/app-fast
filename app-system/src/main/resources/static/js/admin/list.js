@@ -20,7 +20,8 @@ $('#table').bootstrapTable({
             offset: params.offset,       // sql语句起始索引
             page: (params.offset / params.limit) + 1,
             sort: params.sort,           // 排序的列名
-            sortOrder: params.order      // 排序方式'asc' 'desc'
+            sortOrder: params.order,      // 排序方式'asc' 'desc'
+            name: params.search
         };
         return temp;
     },                                   // 传递参数
@@ -36,7 +37,7 @@ $('#table').bootstrapTable({
     pageNumber: 1,                       // 初始化加载第一页，默认第一页
     pageSize: 10,                        // 每页的记录行数
     pageList: [10, 25, 50, 100],         // 可供选择的每页的行数
-    //search: true,                      // 是否显示表格搜索，此搜索是客户端搜索
+    search: true,                      // 是否显示表格搜索，此搜索是客户端搜索
 
     //showExport: true,        // 是否显示导出按钮, 导出功能需要导出插件支持(tableexport.min.js)
     //exportDataType: "basic", // 导出数据类型, 'basic':当前页, 'all':所有数据, 'selected':选中的数据
@@ -242,26 +243,28 @@ status:(0：启用,1：禁用)
  */
 function edit_status(status) {
     var ids = $('#table').bootstrapTable('getAllSelections').map(item => item.id).join(',')
-    $.ajax({
-        type: 'post',
-        url: ctxPath + 'admin/update_status',
-        data: {ids: ids, status: status},
-        dataType: 'json',
-        success: function (response) {
-            var {code, message, data} = response
-            if (code == '0') {
-                // 这里的状态显示有自定义样式区分，做单元格更新
-                for (var i = 0; i < data.length; i++)
-                    $('#table').bootstrapTable('updateCellById', {
-                        id: data[i].id,
-                        field: 'status',
-                        value: data[i].status
-                    });
-            } else {
-                lightyear.notify(message, 'danger', 100);
+    if (ids) {
+        $.ajax({
+            type: 'post',
+            url: ctxPath + 'admin/update_status',
+            data: {ids: ids, status: status},
+            dataType: 'json',
+            success: function (response) {
+                var {code, message, data} = response
+                if (code == '0') {
+                    // 这里的状态显示有自定义样式区分，做单元格更新
+                    for (var i = 0; i < data.length; i++)
+                        $('#table').bootstrapTable('updateCellById', {
+                            id: data[i].id,
+                            field: 'status',
+                            value: data[i].status
+                        });
+                } else {
+                    lightyear.notify(message, 'danger', 100);
+                }
             }
-        }
-    })
+        })
+    }
 }
 
 /*

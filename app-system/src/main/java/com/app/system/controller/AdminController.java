@@ -8,6 +8,7 @@ import com.app.system.entity.PageParam;
 import com.app.system.entity.Result;
 import com.app.system.enums.SortOrderEnum;
 import com.app.system.service.AdminService;
+import com.app.system.service.UploadService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -16,7 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -33,6 +36,9 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private UploadService uploadService;
 
     @GetMapping("/list.html")
     public String list() {
@@ -55,7 +61,7 @@ public class AdminController {
 
     @GetMapping("/list")
     @ResponseBody
-    public Result list(String name, PageParam pageParam) {
+    public Result list(String name,@Validated PageParam pageParam) {
         Page<Admin> page = new Page<>(pageParam.getPage(), pageParam.getLimit());
         if (pageParam.getSortOrder().equalsIgnoreCase(SortOrderEnum.ASC.getDesc())) {
             page.addOrder(OrderItem.asc(pageParam.getSort()));
@@ -91,6 +97,16 @@ public class AdminController {
     public Result update_status(@RequestParam("ids") List<Integer> ids, Integer status) {
         List<Admin> adminList = adminService.update_status(ids, status);
         return Result.success(adminList);
+    }
+
+    @PostMapping("/upload_avatar")
+    @ResponseBody
+    public Result upload_avatar(MultipartFile file) throws IOException {
+        if (file.isEmpty()) {
+            return Result.fail();
+        }
+        String url = uploadService.uploadFile(file.getBytes(), file.getOriginalFilename());
+        return Result.success(url);
     }
 
 }
