@@ -57,7 +57,7 @@ public class Generator {
 
         StrategyConfig strategyConfig = new StrategyConfig();
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
-        String[] tables= {"admin"};
+        String[] tables= {"resource"};
         strategyConfig.setInclude(tables);
         strategyConfig.setRestControllerStyle(true);
         strategyConfig.setEntityLombokModel(true);

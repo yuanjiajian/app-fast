@@ -53,12 +53,11 @@ public class AdminController {
         Admin admin = new Admin();
         if (ObjectUtil.isNull(id)) {
             admin.setStatus(0);
-            model.addAttribute("admin", admin);
         } else {
             admin = adminService.getById(id);
             admin.setPassword(null);
-            model.addAttribute("admin", admin);
         }
+        model.addAttribute("admin", admin);
         return "admin/edit";
     }
 

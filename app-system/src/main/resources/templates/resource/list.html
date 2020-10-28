@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>列表</title>
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="yinqi">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/materialdesignicons.min.css}" rel="stylesheet">
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet">
+    <link th:href="@{/js/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet">
+    <!--对话框-->
+    <link rel="stylesheet" th:href="@{/js/jconfirm/jquery-confirm.min.css}">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid p-t-15">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>TreeGrid使用</h4>
+                </div>
+                <div class="card-body">
+
+                    <div id="toolbar2" class="toolbar-btn-action">
+                        <button type="button" class="btn btn-primary m-r-5" onclick="test()">返回选中行</button>
+                    </div>
+
+                    <table class="tree-table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
