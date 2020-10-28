@@ -28,27 +28,27 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label for="name">名称</label>
-                            <input type="text" class="form-control" id="name" name="name" th:value="${role.name}" placeholder="请输入名称" />
+                            <input type="text" class="form-control" id="name" name="name" th:value="${resource.name}" placeholder="请输入名称" />
                         </div>
 
 
                         <div class="form-group col-md-12">
                             <label for="sort">排序</label>
-                            <input type="number" class="form-control" id="sort" name="sort" th:value="${role.sort==null?'0':role.sort}" />
+                            <input type="number" class="form-control" id="sort" name="sort" th:value="${resource.sort==null?'0':resource.sort}" />
                         </div>
                         <div class="form-group col-md-12">
                             <label for="status">状态</label>
                             <div class="clearfix">
                                 <label class="lyear-radio radio-inline radio-primary">
-                                    <input type="radio" name="status" value="1" th:field="*{role.status}"><span>禁用</span>
+                                    <input type="radio" name="status" value="1" th:field="*{resource.status}"><span>禁用</span>
                                 </label>
                                 <label class="lyear-radio radio-inline radio-primary">
-                                    <input type="radio" name="status" value="0" th:field="*{role.status}"><span>启用</span>
+                                    <input type="radio" name="status" value="0" th:field="*{resource.status}"><span>启用</span>
                                 </label>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <button type="button" class="btn btn-primary"  th:onclick="submit([[${role.id}]])">确 定</button>
+                            <button type="button" class="btn btn-primary"  th:onclick="submit([[${resource.id}]])">确 定</button>
                             <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
                         </div>
                     </div>
@@ -74,6 +74,6 @@
 <script th:inline="javascript" type="text/javascript">
     var ctxPath = /*[[@{/}]]*/'';
 </script>
-<script type="text/javascript" th:src="@{/js/role/edit.js}"></script>
+<script type="text/javascript" th:src="@{/js/resource/edit.js}"></script>
 </body>
 </html>

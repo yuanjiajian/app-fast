@@ -4,8 +4,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
@@ -30,6 +34,7 @@ public class Role implements Serializable {
     /**
      * 名称
      */
+    @NotBlank(message = "名称不能为空")
     private String name;
 
     /**
@@ -45,6 +50,7 @@ public class Role implements Serializable {
     /**
      * 逻辑删除（0未删除，1已删除）
      */
+    @TableLogic(value = "0",delval = "1")
     private Integer deleted;
 
     /**
