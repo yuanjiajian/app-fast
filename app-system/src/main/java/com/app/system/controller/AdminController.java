@@ -6,6 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import com.app.system.entity.Admin;
 import com.app.system.entity.PageParam;
 import com.app.system.entity.Result;
+import com.app.system.enums.ResultEnum;
 import com.app.system.enums.SortOrderEnum;
 import com.app.system.service.AdminService;
 import com.app.system.service.UploadService;
@@ -15,11 +16,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -73,7 +76,15 @@ public class AdminController {
     }
 
     @PostMapping("/add")
+    @ResponseBody
     public Result add(@Validated Admin admin) {
+        Admin adminByUsername = adminService.getOne(new QueryWrapper<Admin>().eq("username", admin.getUsername()));
+        if (ObjectUtil.isNotNull(adminByUsername)) {
+            return Result.fail(ResultEnum.USERNAME_EXIST.getCode(), ResultEnum.USERNAME_EXIST.getDesc());
+        }
+        admin.setPassword(DigestUtils.md5DigestAsHex(admin.getPassword().getBytes()));
+        admin.setCreateTime(LocalDateTime.now());
+        admin.setUpdateTime(LocalDateTime.now());
         adminService.save(admin);
         return Result.success();
     }
@@ -88,6 +99,12 @@ public class AdminController {
     @PostMapping("/update")
     @ResponseBody
     public Result update(@Validated Admin admin) {
+        Admin adminByUsername = adminService.getOne(new QueryWrapper<Admin>().eq("username", admin.getUsername()));
+        if (ObjectUtil.isNotNull(adminByUsername) && adminByUsername.getId() != admin.getId()) {
+            return Result.fail(ResultEnum.USERNAME_EXIST.getCode(), ResultEnum.USERNAME_EXIST.getDesc());
+        }
+        admin.setPassword(DigestUtils.md5DigestAsHex(admin.getPassword().getBytes()));
+        admin.setUpdateTime(LocalDateTime.now());
         adminService.updateById(admin);
         return Result.success();
     }

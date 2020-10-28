@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form action="#!" method="post" class="row">
+                    <div class="row">
 
                         <div class="form-group col-md-12">
                             <label for="username">用户名</label>
@@ -62,7 +62,7 @@
 
                         <div class="form-group col-md-12">
                             <label for="sort">排序</label>
-                            <input type="number" class="form-control" id="sort" name="sort" th:value="${admin.sort}" />
+                            <input type="number" class="form-control" id="sort" name="sort" th:value="${admin.sort==null?'0':admin.sort}" />
                         </div>
                         <div class="form-group col-md-12">
                             <label for="status">状态</label>
@@ -76,10 +76,10 @@
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                            <button type="button" class="btn btn-primary"  th:onclick="submit([[${admin.id}]])">确 定</button>
                             <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
                         </div>
-                    </form>
+                    </div>
 
                 </div>
             </div>

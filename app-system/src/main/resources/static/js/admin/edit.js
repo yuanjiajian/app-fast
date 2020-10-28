@@ -97,3 +97,49 @@ function deletePic(object) {
     $(object).closest('li').remove()
 }
 
+
+function submit(id) {
+
+    var data = {
+        id: id,
+        username: $('#username').val(),
+        password: $('#password').val(),
+        name: $('#name').val(),
+        avatar: $('ul.lyear-uploads-pic li img').attr('src'),
+        sort: $('#sort').val(),
+        status: $("input[name='status']:checked").val()
+    }
+
+    if (id) {
+        $.ajax({
+            type: 'post',
+            url: ctxPath + 'admin/update',
+            data: data,
+            dataType: 'json',
+            success: function (response) {
+                var {code, message, data} = response
+                if (code == '0') {
+                    lightyear.notify(message, 'success', 100);
+                } else {
+                    lightyear.notify(message, 'danger', 100);
+                }
+            }
+        })
+    } else {
+        $.ajax({
+            type: 'post',
+            url: ctxPath + 'admin/add',
+            data: data,
+            dataType: 'json',
+            success: function (response) {
+                var {code, message, data} = response
+                if (code == '0') {
+                    lightyear.notify(message, 'success', 100);
+                } else {
+                    lightyear.notify(message, 'danger', 100);
+                }
+            }
+        })
+    }
+    return false;
+}
