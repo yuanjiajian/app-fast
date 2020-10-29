@@ -142,15 +142,31 @@ function selectParentChecked(datas, row, id, pid) {
 }
 
 function add(id) {
-    alert("add 方法 , id = " + id);
+    window.location.href = ctxPath + 'resource/edit.html?parentId=' + id;
 }
 
-function del(id) {
-    alert("del 方法 , id = " + id);
+function del(ids) {
+    if (ids) {
+        $.ajax({
+            type: 'post',
+            url: ctxPath + 'resource/delete',
+            data: {ids: ids},
+            dataType: 'json',
+            success: function (response) {
+                var {code, message} = response
+                if (code == '0') {
+                    $('#table').bootstrapTable('refresh');
+                    lightyear.notify(message, 'success', 100);
+                } else {
+                    lightyear.notify(message, 'danger', 100);
+                }
+            }
+        })
+    }
 }
 
 function update(id) {
-    alert("update 方法 , id = " + id);
+    window.location.href = ctxPath + 'resource/edit.html?id=' + id
 }
 
 function updateStatus(id, state) {

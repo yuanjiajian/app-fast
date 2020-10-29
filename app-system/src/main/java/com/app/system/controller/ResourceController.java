@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author ${author}
@@ -31,9 +31,10 @@ public class ResourceController {
     }
 
     @GetMapping("/edit.html")
-    public String edit(Integer id, Model model) {
+    public String edit(Integer id, Integer parentId, Model model) {
         Resource resource = new Resource();
         if (ObjectUtil.isNull(id)) {
+            resource.setParentId(parentId);
             resource.setStatus(0);
         } else {
             resource = resourceService.getById(id);
@@ -41,5 +42,6 @@ public class ResourceController {
         model.addAttribute("resource", resource);
         return "resource/edit";
     }
+
 }
 
