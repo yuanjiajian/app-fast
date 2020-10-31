@@ -1,25 +1,27 @@
 // tree-grid使用
-var data = JSON.parse(
-    '[{"id":1, "pid":0, "status":1, "name":"用户管理", "permissionValue":"open:user:manage"},' +
-    '{"id":2, "pid":0, "status":1, "name":"系统管理", "permissionValue":"open:system:manage"},' +
-    '{"id":3, "pid":1, "status":1, "name":"新增用户", "permissionValue":"open:user:add"},' +
-    '{"id":4, "pid":1, "status":1, "name":"修改用户", "permissionValue":"open:user:edit"},' +
-    '{"id":5, "pid":1, "status":0, "name":"删除用户", "permissionValue":"open:user:del"},' +
-    '{"id":6, "pid":2, "status":1, "name":"系统配置管理", "permissionValue":"open:systemconfig:manage"},' +
-    '{"id":7, "pid":6, "status":1, "name":"新增配置", "permissionValue":"open:systemconfig:add"},' +
-    '{"id":8, "pid":6, "status":1, "name":"修改配置", "permissionValue":"open:systemconfig:edit"},' +
-    '{"id":9, "pid":6, "status":0, "name":"删除配置", "permissionValue":"open:systemconfig:del"},' +
-    '{"id":10, "pid":2,"status":1, "name":"系统日志管理", "permissionValue":"open:log:manage"},' +
-    '{"id":11, "pid":10,"status":1, "name":"新增日志", "permissionValue":"open:log:add"},' +
-    '{"id":12, "pid":10,"status":1, "name":"修改日志", "permissionValue":"open:log:edit"},' +
-    '{"id":13, "pid":10,"status":0, "name":"删除日志", "permissionValue":"open:log:del"}]');
+var data = loadData();
+
+function loadData() {
+    var list;
+    $.ajax({
+        type: 'get',
+        async:false,
+        url: ctxPath + 'resource/selectAll',
+        dataType: 'json',
+        success:function (response) {
+            var {data}=response
+            list=data
+        }
+    })
+    return list;
+}
 
 var $treeTable = $('.tree-table');
 $treeTable.bootstrapTable({
     data: data,
     idField: 'id',
     uniqueId: 'id',
-    dataType: 'jsonp',
+    dataType: 'json',
     toolbar: '#toolbar2',
     columns: [
         {
@@ -31,6 +33,34 @@ $treeTable.bootstrapTable({
             title: '名称'
         },
         {
+            field: 'url',
+            title: '地址'
+        },
+        {
+            field: 'type',
+            title: '类型',
+            formatter: function (value, row, index) {
+                if(value==0){
+                    return '目录';
+                }else if(value==1){
+                    return '菜单';
+                }else if(value==2){
+                    return '按钮';
+                }
+            }
+        },
+        {
+            field:'icon',
+            title:'图标',
+            formatter: function (value, row, index) {
+                return '<i class="mdi '+value+'"></i>';
+            }
+        },
+        {
+            field:'sort',
+            title:'排序'
+        },
+        {
             field: 'status',
             title: '状态',
             sortable: true,
@@ -39,9 +69,9 @@ $treeTable.bootstrapTable({
              * 或者采用上个示例的处理方式
              */
             formatter: function (value, row, index) {
-                if (value == 0) {
+                if (value == 1) {
                     is_checked = '';
-                } else if (value == 1) {
+                } else if (value == 0) {
                     is_checked = 'checked="checked"';
                 }
                 result = '<label class="lyear-switch switch-primary lyear-status"><input type="checkbox" ' + is_checked + '><span  onClick="updateStatus(' + row.id + ', ' + value + ')"></span></label>';
@@ -49,8 +79,17 @@ $treeTable.bootstrapTable({
             },
         },
         {
-            field: 'permissionValue',
-            title: '权限值'
+            field: 'createTime',
+            title: '创建时间',
+            formatter: function (value, row, index) {
+                return value.replace('T', ' ');
+            }
+        },{
+            field: 'updateTime',
+            title: '修改时间',
+            formatter: function (value, row, index) {
+                return value.replace('T', ' ');
+            }
         },
         {
             field: 'operate',
@@ -72,7 +111,7 @@ $treeTable.bootstrapTable({
     ],
 
     treeShowField: 'name',
-    parentIdField: 'pid',
+    parentIdField: 'parentId',
 
     onResetView: function (data) {
         $treeTable.treegrid({
@@ -169,19 +208,26 @@ function update(id) {
     window.location.href = ctxPath + 'resource/edit.html?id=' + id
 }
 
-function updateStatus(id, state) {
+function updateStatus(ids, state) {
     var newstate = (state == 1) ? 0 : 1; // 发送参数值跟当前参数值相反
     $.ajax({
-        type: "get",
-        url: "http://www.bixiaguangnian.com/index/test/testGridJson",
-        data: {id: id, state: newstate},
-        dataType: 'jsonp',
-        success: function (data, status) {
-            if (data.code == '200') {
-                $treeTable.bootstrapTable('updateCellById', {id: id, field: 'status', value: newstate});
+        type: "post",
+        url: ctxPath + 'resource/update_status',
+        data: {ids: ids, status: newstate},
+        dataType: 'json',
+        success: function (response, status) {
+            var {code, message, data} = response
+            if (code == '0') {
+                for (var i = 0; i < data.length; i++){
+                    $treeTable.bootstrapTable('updateCellById', {id: data[i].id, field: 'status', value: newstate});
+                }
+
             } else {
-                alert(data.msg);
-                $treeTable.bootstrapTable('updateCellById', {id: id, field: 'status', value: state}); // 因开关点击后样式是变的，失败也重置下
+                lightyear.notify(message, 'danger', 100);
+                for (var i = 0; i < data.length; i++){
+                    $treeTable.bootstrapTable('updateCellById', {id: data[i].id, field: 'status', value: state}); // 因开关点击后样式是变的，失败也重置下
+                }
+
             }
         },
         error: function () {

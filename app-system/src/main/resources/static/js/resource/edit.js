@@ -2,7 +2,11 @@
 function submit(id) {
     var data = {
         id: id,
+        parentId:$('#parentId').val(),
         name: $('#name').val(),
+        url:$('#url').val(),
+        type:$('#type').val(),
+        icon:$('#icon').val(),
         sort: $('#sort').val(),
         status: $("input[name='status']:checked").val()
     }
