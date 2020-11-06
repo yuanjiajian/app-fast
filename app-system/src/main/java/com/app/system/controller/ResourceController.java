@@ -2,16 +2,9 @@ package com.app.system.controller;
 
 
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
-import com.app.system.entity.PageParam;
 import com.app.system.entity.Resource;
 import com.app.system.entity.Result;
-import com.app.system.entity.Role;
-import com.app.system.enums.SortOrderEnum;
 import com.app.system.service.ResourceService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +39,7 @@ public class ResourceController {
         Resource resource = new Resource();
         if (ObjectUtil.isNull(id)) {
             resource.setParentId(parentId);
+            resource.setType(0);
             resource.setStatus(0);
         } else {
             resource = resourceService.getById(id);
@@ -67,6 +61,13 @@ public class ResourceController {
         resource.setCreateTime(LocalDateTime.now());
         resource.setUpdateTime(LocalDateTime.now());
         resourceService.save(resource);
+        return Result.success();
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public Result delete(@RequestParam("ids") List<Integer> ids) {
+        resourceService.delete(ids);
         return Result.success();
     }
 

@@ -16,6 +16,8 @@
     <!--对话框-->
     <link rel="stylesheet" th:href="@{/js/jconfirm/jquery-confirm.min.css}">
     <link th:href="@{/css/style.min.css}" rel="stylesheet">
+    <!--下拉树状菜单-->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.lyear.dropdowntree.min.css}">
 </head>
 <body>
 <div class="container-fluid p-t-15">
@@ -28,8 +30,10 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label for="parentId">父ID</label>
-                            <input type="text" class="form-control" id="parentId" name="parentId"
-                                   th:value="${resource.parentId}" placeholder="请输入父ID"/>
+                            <div class="lyear-dropdown-tree">
+                                <input th:attr="data-parentId=${resource.parentId}" id="parentId" name="parentId"
+                                       type="text" class="form-control" placeholder="请选择父ID" data-toggle="dropdown">
+                            </div>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="name">名称</label>
@@ -43,8 +47,20 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="type">类型</label>
-                            <input type="text" class="form-control" id="type" name="type" th:value="${resource.type}"
-                                   placeholder="请输入类型(0目录，1菜单，2按钮)"/>
+                            <div class="clearfix">
+                                <label class="lyear-radio radio-inline radio-primary">
+                                    <input type="radio" name="type" value="0"
+                                           th:field="*{resource.type}"><span>目录</span>
+                                </label>
+                                <label class="lyear-radio radio-inline radio-primary">
+                                    <input type="radio" name="type" value="1"
+                                           th:field="*{resource.type}"><span>菜单</span>
+                                </label>
+                                <label class="lyear-radio radio-inline radio-primary">
+                                    <input type="radio" name="type" value="2"
+                                           th:field="*{resource.type}"><span>按钮</span>
+                                </label>
+                            </div>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="icon">图标</label>
@@ -97,6 +113,8 @@
 <!--对话框-->
 <script th:src="@{/js/jconfirm/jquery-confirm.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+<!--下拉树状菜单-->
+<script type="text/javascript" th:src="@{/js/bootstrap.lyear.dropdowntree.min.js}"></script>
 <script th:inline="javascript" type="text/javascript">
     var ctxPath = /*[[@{/}]]*/'';
 </script>

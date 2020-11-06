@@ -5,12 +5,12 @@ function loadData() {
     var list;
     $.ajax({
         type: 'get',
-        async:false,
+        async: false,
         url: ctxPath + 'resource/selectAll',
         dataType: 'json',
-        success:function (response) {
-            var {data}=response
-            list=data
+        success: function (response) {
+            var {data} = response
+            list = data
         }
     })
     return list;
@@ -40,25 +40,25 @@ $treeTable.bootstrapTable({
             field: 'type',
             title: '类型',
             formatter: function (value, row, index) {
-                if(value==0){
+                if (value == 0) {
                     return '目录';
-                }else if(value==1){
+                } else if (value == 1) {
                     return '菜单';
-                }else if(value==2){
+                } else if (value == 2) {
                     return '按钮';
                 }
             }
         },
         {
-            field:'icon',
-            title:'图标',
+            field: 'icon',
+            title: '图标',
             formatter: function (value, row, index) {
-                return '<i class="mdi '+value+'"></i>';
+                return '<i class="mdi ' + value + '"></i>';
             }
         },
         {
-            field:'sort',
-            title:'排序'
+            field: 'sort',
+            title: '排序'
         },
         {
             field: 'status',
@@ -84,7 +84,7 @@ $treeTable.bootstrapTable({
             formatter: function (value, row, index) {
                 return value.replace('T', ' ');
             }
-        },{
+        }, {
             field: 'updateTime',
             title: '修改时间',
             formatter: function (value, row, index) {
@@ -96,13 +96,13 @@ $treeTable.bootstrapTable({
             title: '操作',
             align: 'center',
             events: {
-                'click .role-add': function (e, value, row, index) {
+                'click .add': function (e, value, row, index) {
                     add(row.id);
                 },
-                'click .role-delete': function (e, value, row, index) {
+                'click .delete': function (e, value, row, index) {
                     del(row.id);
                 },
-                'click .role-edit': function (e, value, row, index) {
+                'click .edit': function (e, value, row, index) {
                     update(row.id);
                 }
             },
@@ -147,9 +147,9 @@ $treeTable.bootstrapTable({
 // 操作按钮
 function operateFormatter(value, row, index) {
     return [
-        '<a type="button" class="role-add btn btn-xs btn-default m-r-5" title="编辑" data-toggle="tooltip"><i class="mdi mdi-plus"></i></a>',
-        '<a type="button" class="role-edit btn btn-xs btn-default m-r-5" title="修改" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>',
-        '<a type="button" class="role-delete btn btn-xs btn-default" title="删除" data-toggle="tooltip"><i class="mdi mdi-delete"></i></a>'
+        '<a type="button" class="add btn btn-xs btn-default m-r-5" title="编辑" data-toggle="tooltip"><i class="mdi mdi-plus"></i></a>',
+        '<a type="button" class="edit btn btn-xs btn-default m-r-5" title="修改" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>',
+        '<a type="button" class="delete btn btn-xs btn-default" title="删除" data-toggle="tooltip"><i class="mdi mdi-delete"></i></a>'
     ].join('');
 }
 
@@ -218,13 +218,13 @@ function updateStatus(ids, state) {
         success: function (response, status) {
             var {code, message, data} = response
             if (code == '0') {
-                for (var i = 0; i < data.length; i++){
+                for (var i = 0; i < data.length; i++) {
                     $treeTable.bootstrapTable('updateCellById', {id: data[i].id, field: 'status', value: newstate});
                 }
 
             } else {
                 lightyear.notify(message, 'danger', 100);
-                for (var i = 0; i < data.length; i++){
+                for (var i = 0; i < data.length; i++) {
                     $treeTable.bootstrapTable('updateCellById', {id: data[i].id, field: 'status', value: state}); // 因开关点击后样式是变的，失败也重置下
                 }
 
@@ -236,20 +236,3 @@ function updateStatus(ids, state) {
     });
 }
 
-function test() {
-    var selRows = $treeTable.bootstrapTable("getSelections");
-    if (selRows.length == 0) {
-        alert("请至少选择一行");
-        return;
-    }
-    console.log(selRows);
-
-    var postData = "";
-    $.each(selRows, function (i) {
-        postData += this.id;
-        if (i < selRows.length - 1) {
-            postData += "， ";
-        }
-    });
-    alert("你选中行的 id 为：" + postData);
-}

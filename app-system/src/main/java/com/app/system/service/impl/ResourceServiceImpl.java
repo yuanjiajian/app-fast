@@ -1,14 +1,17 @@
 package com.app.system.service.impl;
 
-import com.app.system.entity.Admin;
+import cn.hutool.core.collection.CollUtil;
 import com.app.system.entity.Resource;
 import com.app.system.mapper.ResourceMapper;
 import com.app.system.service.ResourceService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -30,5 +33,16 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             this.updateById(resource);
         }
         return resourceList;
+    }
+
+    @Override
+    @Transactional
+    public void delete(List<Integer> ids) {
+        this.removeByIds(ids);
+        List<Resource> resourceList = this.list(new QueryWrapper<Resource>().in("parent_id", ids));
+        if (CollUtil.isNotEmpty(resourceList)) {
+            List<Integer> idList = resourceList.stream().map(Resource::getId).collect(Collectors.toList());
+            this.delete(idList);
+        }
     }
 }

@@ -3,7 +3,6 @@ package com.app.system.controller;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.app.system.entity.Admin;
 import com.app.system.entity.PageParam;
 import com.app.system.entity.Result;
 import com.app.system.entity.Role;
@@ -16,7 +15,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.DigestUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

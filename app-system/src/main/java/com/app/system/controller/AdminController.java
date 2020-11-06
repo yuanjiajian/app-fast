@@ -6,9 +6,11 @@ import cn.hutool.core.util.StrUtil;
 import com.app.system.entity.Admin;
 import com.app.system.entity.PageParam;
 import com.app.system.entity.Result;
+import com.app.system.entity.Role;
 import com.app.system.enums.ResultEnum;
 import com.app.system.enums.SortOrderEnum;
 import com.app.system.service.AdminService;
+import com.app.system.service.RoleService;
 import com.app.system.service.UploadService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
@@ -41,6 +43,9 @@ public class AdminController {
     private AdminService adminService;
 
     @Autowired
+    private RoleService roleService;
+
+    @Autowired
     private UploadService uploadService;
 
     @GetMapping("/list.html")
@@ -58,6 +63,8 @@ public class AdminController {
             admin.setPassword(null);
         }
         model.addAttribute("admin", admin);
+        List<Role> roleList = roleService.list();
+        model.addAttribute("roleList", roleList);
         return "admin/edit";
     }
 

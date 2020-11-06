@@ -1,12 +1,64 @@
+var data = loadData();
+
+var test = $('.lyear-dropdown-tree').lyearDropdownTree({
+    data: data,
+    multiSelect: false,
+    jsonStr: ',',
+    selectedData: [$('#parentId').attr('data-parentId')],
+    relationParent: true,
+    relationChildren: true,
+
+    checkHandler: function (el) {
+        //console.log("checked ", el);
+    },
+});
+
+function loadData() {
+    var list;
+    $.ajax({
+        type: 'get',
+        async: false,
+        url: ctxPath + 'resource/selectAll',
+        dataType: 'json',
+        success: function (response) {
+            var {data} = response
+            list = data
+        }
+    })
+    return toTree(list);
+}
+
+function toTree(data) {
+    let result = []
+    if (!Array.isArray(data)) {
+        return result
+    }
+    data.forEach(item => {
+        delete item.children;
+    });
+    let map = {};
+    data.forEach(item => {
+        map[item.id] = item;
+    });
+    data.forEach(item => {
+        let parent = map[item.parentId];
+        if (parent) {
+            (parent.children || (parent.children = [])).push(item);
+        } else {
+            result.push(item);
+        }
+    });
+    return result;
+}
 
 function submit(id) {
     var data = {
         id: id,
-        parentId:$('#parentId').val(),
+        parentId: test.getSelectedID() ? test.getSelectedID() : 0,
         name: $('#name').val(),
-        url:$('#url').val(),
-        type:$('#type').val(),
-        icon:$('#icon').val(),
+        url: $('#url').val(),
+        type: $("input[name='type']:checked").val(),
+        icon: $('#icon').val(),
         sort: $('#sort').val(),
         status: $("input[name='status']:checked").val()
     }
