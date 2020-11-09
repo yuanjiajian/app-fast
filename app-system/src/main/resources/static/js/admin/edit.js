@@ -114,15 +114,15 @@ function submit(id) {
         avatar: $('ul.lyear-uploads-pic li img').attr('src'),
         sort: $('#sort').val(),
         status: $("input[name='status']:checked").val(),
-        roleList:JSON.stringify(roleList)
+        roleList:roleList
     }
-
+console.log(JSON.stringify(data))
     if (id) {
         $.ajax({
             type: 'post',
             url: ctxPath + 'admin/update',
-            data: data,
-            contentType: "application/json; charset=utf-8",
+            data:JSON.stringify(data),
+            contentType:'application/json;charset=utf-8',
             dataType: 'json',
             success: function (response) {
                 var {code, message} = response
@@ -137,8 +137,8 @@ function submit(id) {
         $.ajax({
             type: 'post',
             url: ctxPath + 'admin/add',
-            data: data,
-            contentType: "application/json; charset=utf-8",
+            data:JSON.stringify(data) ,
+            contentType:'application/json;charset=utf-8',
             dataType: 'json',
             success: function (response) {
                 var {code, message} = response
