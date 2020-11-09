@@ -99,7 +99,13 @@ function deletePic(object) {
 
 
 function submit(id) {
-
+    var roleList=[]
+    $("input[name='roleList']:checked").each(function(index,item){
+        var role={
+            id:$(item).val()
+        }
+        roleList.push(role);
+    });
     var data = {
         id: id,
         username: $('#username').val(),
@@ -107,7 +113,8 @@ function submit(id) {
         name: $('#name').val(),
         avatar: $('ul.lyear-uploads-pic li img').attr('src'),
         sort: $('#sort').val(),
-        status: $("input[name='status']:checked").val()
+        status: $("input[name='status']:checked").val(),
+        roleList:JSON.stringify(roleList)
     }
 
     if (id) {
@@ -115,9 +122,10 @@ function submit(id) {
             type: 'post',
             url: ctxPath + 'admin/update',
             data: data,
+            contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: function (response) {
-                var {code, message, data} = response
+                var {code, message} = response
                 if (code == '0') {
                     lightyear.notify(message, 'success', 100);
                 } else {
@@ -130,9 +138,10 @@ function submit(id) {
             type: 'post',
             url: ctxPath + 'admin/add',
             data: data,
+            contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: function (response) {
-                var {code, message, data} = response
+                var {code, message} = response
                 if (code == '0') {
                     lightyear.notify(message, 'success', 100);
                 } else {

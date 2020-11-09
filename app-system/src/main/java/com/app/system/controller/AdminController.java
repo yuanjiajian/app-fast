@@ -60,6 +60,8 @@ public class AdminController {
             admin.setStatus(0);
         } else {
             admin = adminService.getById(id);
+            List<Role> roleList = roleService.listByAdminId(id);
+            admin.setRoleList(roleList);
             admin.setPassword(null);
         }
         model.addAttribute("admin", admin);
@@ -83,7 +85,7 @@ public class AdminController {
 
     @PostMapping("/add")
     @ResponseBody
-    public Result add(@Validated Admin admin) {
+    public Result add(@RequestBody @Validated Admin admin) {
         Admin adminByUsername = adminService.getOne(new QueryWrapper<Admin>().eq("username", admin.getUsername()));
         if (ObjectUtil.isNotNull(adminByUsername)) {
             return Result.fail(ResultEnum.USERNAME_EXIST.getCode(), ResultEnum.USERNAME_EXIST.getDesc());
@@ -104,7 +106,7 @@ public class AdminController {
 
     @PostMapping("/update")
     @ResponseBody
-    public Result update(@Validated Admin admin) {
+    public Result update(@RequestBody @Validated Admin admin) {
         Admin adminByUsername = adminService.getOne(new QueryWrapper<Admin>().eq("username", admin.getUsername()));
         if (ObjectUtil.isNotNull(adminByUsername) && adminByUsername.getId() != admin.getId()) {
             return Result.fail(ResultEnum.USERNAME_EXIST.getCode(), ResultEnum.USERNAME_EXIST.getDesc());

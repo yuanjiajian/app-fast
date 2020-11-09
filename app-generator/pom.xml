@@ -26,7 +26,7 @@
             <version>${mysql.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-generator -->
+        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-generatorParam -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>

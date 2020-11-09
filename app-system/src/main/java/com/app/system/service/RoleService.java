@@ -16,4 +16,6 @@ import java.util.List;
 public interface RoleService extends IService<Role> {
 
     List<Role> update_status(List<Integer> ids, Integer status);
+
+    List<Role> listByAdminId(Integer id);
 }

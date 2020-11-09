@@ -20,6 +20,7 @@
         <hibernatevalidator.version>6.1.6.Final</hibernatevalidator.version>
         <hutool.version>5.4.5</hutool.version>
         <lombok.version>1.18.16</lombok.version>
+        <app-generator.version>1.0-SNAPSHOT</app-generator.version>
     </properties>
 
     <dependencies>
@@ -72,7 +73,11 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.app.generator</groupId>
+            <artifactId>app-generator</artifactId>
+            <version>${app-generator.version}</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

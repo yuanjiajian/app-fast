@@ -32,4 +32,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         }
         return roleList;
     }
+
+    @Override
+    public List<Role> listByAdminId(Integer id) {
+        return this.baseMapper.listByAdminId(id);
+    }
 }
