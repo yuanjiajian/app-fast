@@ -4,10 +4,12 @@ package com.app.system.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.app.system.entity.PageParam;
+import com.app.system.entity.Resource;
 import com.app.system.entity.Result;
 import com.app.system.entity.Role;
 import com.app.system.enums.ResultEnum;
 import com.app.system.enums.SortOrderEnum;
+import com.app.system.service.ResourceService;
 import com.app.system.service.RoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
@@ -36,6 +38,9 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private ResourceService resourceService;
+
     @GetMapping("/list.html")
     public String list() {
         return "role/list";
@@ -48,6 +53,8 @@ public class RoleController {
             role.setStatus(0);
         } else {
             role = roleService.getById(id);
+            List<Resource> resourceList = resourceService.listByRoleId(id);
+            role.setResourceList(resourceList);
         }
         model.addAttribute("role", role);
         return "role/edit";
@@ -69,33 +76,33 @@ public class RoleController {
 
     @PostMapping("/add")
     @ResponseBody
-    public Result add(@Validated Role role) {
+    public Result add(@RequestBody @Validated Role role) {
         Role roleByName = roleService.getOne(new QueryWrapper<Role>().eq("name", role.getName()));
         if (ObjectUtil.isNotNull(roleByName)) {
             return Result.fail(ResultEnum.ROLE_NAME_EXIST.getCode(), ResultEnum.ROLE_NAME_EXIST.getDesc());
         }
         role.setCreateTime(LocalDateTime.now());
         role.setUpdateTime(LocalDateTime.now());
-        roleService.save(role);
+        roleService.add(role);
         return Result.success();
     }
 
     @PostMapping("/delete")
     @ResponseBody
     public Result delete(@RequestParam("ids") List<Integer> ids) {
-        roleService.removeByIds(ids);
+        roleService.delete(ids);
         return Result.success();
     }
 
     @PostMapping("/update")
     @ResponseBody
-    public Result update(@Validated Role role) {
+    public Result update(@RequestBody @Validated Role role) {
         Role roleByName = roleService.getOne(new QueryWrapper<Role>().eq("name", role.getName()));
         if (ObjectUtil.isNotNull(roleByName) && roleByName.getId() != role.getId()) {
             return Result.fail(ResultEnum.ROLE_NAME_EXIST.getCode(), ResultEnum.ROLE_NAME_EXIST.getDesc());
         }
         role.setUpdateTime(LocalDateTime.now());
-        roleService.updateById(role);
+        roleService.edit(role);
         return Result.success();
     }
 

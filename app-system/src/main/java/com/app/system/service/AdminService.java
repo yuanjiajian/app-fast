@@ -16,4 +16,10 @@ import java.util.List;
 public interface AdminService extends IService<Admin> {
 
     List<Admin> update_status(List<Integer> ids, Integer status);
+
+    void add(Admin admin);
+
+    void edit(Admin admin);
+
+    void delete(List<Integer> ids);
 }

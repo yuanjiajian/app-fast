@@ -1,9 +1,12 @@
 package com.app.system.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
@@ -63,5 +66,9 @@ public class Role implements Serializable {
      */
     private LocalDateTime updateTime;
 
-
+    /**
+     * 资源集合
+     */
+    @TableField(exist = false)
+    private List<Resource> resourceList = new ArrayList<>();
 }

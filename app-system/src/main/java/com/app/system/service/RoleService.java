@@ -18,4 +18,10 @@ public interface RoleService extends IService<Role> {
     List<Role> update_status(List<Integer> ids, Integer status);
 
     List<Role> listByAdminId(Integer id);
+
+    void add(Role role);
+
+    void edit(Role role);
+
+    void delete(List<Integer> ids);
 }

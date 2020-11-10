@@ -93,14 +93,14 @@ public class AdminController {
         admin.setPassword(DigestUtils.md5DigestAsHex(admin.getPassword().getBytes()));
         admin.setCreateTime(LocalDateTime.now());
         admin.setUpdateTime(LocalDateTime.now());
-        adminService.save(admin);
+        adminService.add(admin);
         return Result.success();
     }
 
     @PostMapping("/delete")
     @ResponseBody
     public Result delete(@RequestParam("ids") List<Integer> ids) {
-        adminService.removeByIds(ids);
+        adminService.delete(ids);
         return Result.success();
     }
 
@@ -113,7 +113,7 @@ public class AdminController {
         }
         admin.setPassword(DigestUtils.md5DigestAsHex(admin.getPassword().getBytes()));
         admin.setUpdateTime(LocalDateTime.now());
-        adminService.updateById(admin);
+        adminService.edit(admin);
         return Result.success();
     }
 

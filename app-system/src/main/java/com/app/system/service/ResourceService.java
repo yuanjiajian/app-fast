@@ -18,4 +18,6 @@ public interface ResourceService extends IService<Resource> {
     List<Resource> update_status(List<Integer> ids, Integer status);
 
     void delete(List<Integer> ids);
+
+    List<Resource> listByRoleId(Integer id);
 }

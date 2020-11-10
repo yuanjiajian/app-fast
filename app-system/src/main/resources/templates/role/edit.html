@@ -16,6 +16,8 @@
     <!--对话框-->
     <link rel="stylesheet" th:href="@{/js/jconfirm/jquery-confirm.min.css}">
     <link th:href="@{/css/style.min.css}" rel="stylesheet">
+    <!--下拉树状菜单-->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.lyear.dropdowntree.min.css}">
 </head>
 <body>
 <div class="container-fluid p-t-15">
@@ -48,6 +50,15 @@
                             </div>
                         </div>
                         <div class="form-group col-md-12">
+                            <label for="resourceList">资源</label>
+                            <div th:each="resource:${role.resourceList}">
+                                <input type="hidden" id="resourceList" name="resourceList" th:value="${resource.id}">
+                            </div>
+                            <div class="lyear-dropdown-tree">
+                                <input type="text" class="form-control" placeholder="请选择资源" data-toggle="dropdown">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
                             <button type="button" class="btn btn-primary"  th:onclick="submit([[${role.id}]])">确 定</button>
                             <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
                         </div>
@@ -71,6 +82,8 @@
 <!--对话框-->
 <script th:src="@{/js/jconfirm/jquery-confirm.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+<!--下拉树状菜单-->
+<script type="text/javascript" th:src="@{/js/bootstrap.lyear.dropdowntree.min.js}"></script>
 <script th:inline="javascript" type="text/javascript">
     var ctxPath = /*[[@{/}]]*/'';
 </script>
