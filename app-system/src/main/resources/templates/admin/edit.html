@@ -92,19 +92,16 @@
                                 <label th:each="role : ${roleList}"
                                        class="lyear-checkbox checkbox-inline checkbox-primary">
                                     <th:block th:if="${admin.roleList.isEmpty()}">
-                                        <input name="roleList" th:value="${role.id}" type="checkbox"
-                                               th:disabled="${role.status == 1}"><span th:text="${role.name}"></span>
+                                        <input name="roleList" th:value="${role.id}" type="checkbox"><span th:text="${role.name}"></span>
                                     </th:block>
                                     <th:block th:unless="${admin.roleList.isEmpty()}">
                                         <th:block th:each="r:${admin.roleList}">
                                             <th:block th:if="${r.id==role.id}">
-                                                <input name="roleList" th:value="${role.id}" type="checkbox" checked
-                                                       th:disabled="${role.status == 1}"><span
+                                                <input name="roleList" th:value="${role.id}" type="checkbox" checked><span
                                                     th:text="${role.name}"></span>
                                             </th:block>
                                             <th:block th:unless="${r.id==role.id}">
-                                                <input name="roleList" th:value="${role.id}" type="checkbox"
-                                                       th:disabled="${role.status == 1}"><span
+                                                <input name="roleList" th:value="${role.id}" type="checkbox"><span
                                                     th:text="${role.name}"></span>
                                             </th:block>
                                         </th:block>
