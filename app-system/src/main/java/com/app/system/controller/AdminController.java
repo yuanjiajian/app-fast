@@ -133,6 +133,5 @@ public class AdminController {
         String url = uploadService.uploadFile(file.getBytes(), file.getOriginalFilename());
         return Result.success(url);
     }
-
 }
 
