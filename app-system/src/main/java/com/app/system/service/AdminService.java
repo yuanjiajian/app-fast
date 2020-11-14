@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author ${author}
@@ -22,4 +22,6 @@ public interface AdminService extends IService<Admin> {
     void edit(Admin admin);
 
     void delete(List<Integer> ids);
+
+    Admin getRoleWithResourceById(Integer id);
 }

@@ -80,4 +80,11 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         this.removeByIds(ids);
         adminRoleService.remove(new QueryWrapper<AdminRole>().in("admin_id", ids));
     }
+
+    @Override
+    public Admin getRoleWithResourceById(Integer id) {
+        return null;
+    }
+
+
 }

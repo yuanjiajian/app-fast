@@ -1,5 +1,6 @@
 package com.app.system.entity;
 
+import com.app.system.validation.LoginGroup;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -39,13 +40,13 @@ public class Admin implements Serializable {
     /**
      * 用户名
      */
-    @NotBlank(message = "用户名不能为空")
+    @NotBlank(message = "用户名不能为空",groups = {LoginGroup.class})
     private String username;
 
     /**
      * 密码
      */
-    @NotBlank(message = "密码不能为空")
+    @NotBlank(message = "密码不能为空",groups = {LoginGroup.class})
     private String password;
     @JsonIgnore
     public String getPassword() {
