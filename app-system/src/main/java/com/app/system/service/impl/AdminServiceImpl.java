@@ -83,7 +83,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     @Override
     public Admin getRoleWithResourceById(Integer id) {
-        return null;
+        return this.baseMapper.getRoleWithResourceById(id);
     }
 
 

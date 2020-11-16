@@ -5,10 +5,8 @@ import cn.hutool.captcha.ICaptcha;
 import cn.hutool.core.util.ObjectUtil;
 import com.app.system.entity.Admin;
 import com.app.system.entity.Result;
-import com.app.system.entity.Role;
 import com.app.system.enums.ResultEnum;
 import com.app.system.service.AdminService;
-import com.app.system.service.RoleService;
 import com.app.system.validation.LoginGroup;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotBlank;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @Validated
