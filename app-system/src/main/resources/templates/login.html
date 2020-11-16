@@ -62,7 +62,7 @@
       <div class="login-header text-center">
         <a href="index.html"> <img alt="light year admin" src="images/logo-sidebar.png"> </a>
       </div>
-      <form action="#!" method="post">
+      <div>
         <div class="form-group has-feedback feedback-left">
           <input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="username" />
           <span class="mdi mdi-account form-control-feedback" aria-hidden="true"></span>
@@ -73,7 +73,7 @@
         </div>
         <div class="form-group has-feedback feedback-left row">
           <div class="col-xs-7">
-            <input type="text" name="captcha" class="form-control" placeholder="验证码">
+            <input type="text" id="picCode" name="captcha" class="form-control" placeholder="验证码">
             <span class="mdi mdi-check-all form-control-feedback" aria-hidden="true"></span>
           </div>
           <div class="col-xs-5">
@@ -86,9 +86,9 @@
           </label>
         </div>
         <div class="form-group">
-          <button class="btn btn-block btn-primary" type="button" onclick="location.href='index.html'">立即登录</button>
+          <button class="btn btn-block btn-primary" type="button" onclick="login()">立即登录</button>
         </div>
-      </form>
+      </div>
       <hr>
       <footer class="col-sm-12 text-center">
         <p class="m-b-0">Copyright © 2019 <a href="http://lyear.itshubao.com">IT书包</a>. All right reserved</p>
@@ -98,6 +98,12 @@
 </div>
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-<script type="text/javascript">;</script>
+<!--消息提示-->
+<script th:src="@{/js/bootstrap-notify.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/lightyear.js}"></script>
+<script th:inline="javascript" type="text/javascript">
+  var ctxPath = /*[[@{/}]]*/'';
+</script>
+<script type="text/javascript" th:src="@{/js/login.js}"></script>
 </body>
 </html>
