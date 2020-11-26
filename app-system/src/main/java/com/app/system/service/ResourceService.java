@@ -1,5 +1,7 @@
 package com.app.system.service;
 
+import com.app.system.entity.Admin;
+import com.app.system.entity.Menu;
 import com.app.system.entity.Resource;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -20,4 +22,8 @@ public interface ResourceService extends IService<Resource> {
     void delete(List<Integer> ids);
 
     List<Resource> listByRoleId(Integer id);
+
+    List<Resource> getResourceList(Admin admin);
+
+    List<Menu> getMenuList(List<Resource> resourceList);
 }

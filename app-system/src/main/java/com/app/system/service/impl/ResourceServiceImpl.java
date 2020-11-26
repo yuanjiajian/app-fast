@@ -1,6 +1,11 @@
 package com.app.system.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.app.system.entity.Admin;
+import com.app.system.entity.Menu;
 import com.app.system.entity.Resource;
 import com.app.system.entity.RoleResource;
 import com.app.system.mapper.ResourceMapper;
@@ -13,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,5 +62,39 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     @Override
     public List<Resource> listByRoleId(Integer id) {
         return this.baseMapper.listByRoleId(id);
+    }
+
+    /**
+     * 获取当前用户对应资源集合
+     *
+     * @param admin
+     * @return
+     */
+    @Override
+    public List<Resource> getResourceList(Admin admin) {
+        List<Resource> resourceList = new ArrayList<>();
+        if (ObjectUtil.isNull(admin)) {
+            return resourceList;
+        }
+        admin.getRoleList().stream().filter(role -> role.getStatus() == 0).collect(Collectors.toList()).forEach(role -> {
+            role.getResourceList().stream().filter(resource -> resource.getStatus() == 0).collect(Collectors.toList()).forEach(resource -> {
+                if (ArrayUtil.isEmpty(resourceList)) {
+                    resourceList.add(resource);
+                    return;
+                }
+                resourceList.forEach(r -> {
+                    if (r.getUrl().equals(resource.getUrl())) {
+                        return;
+                    }
+                });
+                resourceList.add(resource);
+            });
+        });
+        return resourceList;
+    }
+
+    @Override
+    public List<Menu> getMenuList(List<Resource> resourceList) {
+        return null;
     }
 }
