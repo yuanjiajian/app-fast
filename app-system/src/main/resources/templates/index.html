@@ -28,26 +28,13 @@
         
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
-            <li class="nav-item active">
+            <!--<li class="nav-item active">
                 <a class="multitabs" href="main.html"><i class="mdi mdi-home"></i> <span>后台首页</span></a>
-            </li>
-            <li class="nav-item nav-item-has-subnav">
-              <a href="javascript:void(0)"><i class="mdi mdi-palette"></i> <span>UI 元素</span></a>
-              <ul class="nav nav-subnav">
-                <li> <a class="multitabs" href="lyear_ui_buttons.html">按钮</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_cards.html">卡片</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_grid.html">格栅</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_icons.html">图标</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_tables.html">表格</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_modals.html">模态框</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_tooltips_popover.html">提示 / 弹出框</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_alerts.html">警告框</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_pagination.html">分页</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_progress.html">进度条</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_tabs.html">标签页</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_typography.html">排版</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_step.html">步骤</a> </li>
-                <li> <a class="multitabs" href="lyear_ui_other.html">其他</a> </li>
+            </li>-->
+            <li th:each="menu:${menuList}" class=""th:classappend="${#lists.isEmpty(menu.childrenMenu)}?'nav-item':'nav-item nav-item-has-subnav'">
+              <a href="javascript:void(0)"><i class=""th:classappend="${menu.icon} ? 'mdi '+${menu.icon} : '' "></i> <span th:text="${menu.name}"></span></a>
+              <ul th:if="${!#lists.isEmpty(menu.childrenMenu)}" class="nav nav-subnav">
+                <li th:each="m:${menu.childrenMenu}"> <a class="multitabs" th:href="@{${m.type==1&&m.url!=''?m.url:''}}" th:text="${m.name}"></a> </li>
               </ul>
             </li>
 
