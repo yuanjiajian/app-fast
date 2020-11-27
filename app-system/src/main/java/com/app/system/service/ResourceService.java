@@ -25,5 +25,5 @@ public interface ResourceService extends IService<Resource> {
 
     List<Resource> getResourceList(Admin admin);
 
-    List<Menu> getMenuList(List<Resource> resourceList);
+    List<Menu> getMenuList(List<Resource> resourceList,Integer parentId);
 }

@@ -24,7 +24,8 @@ public class IndexController {
     public String index(Model model) {
         Admin admin = (Admin) session.getAttribute("admin");
         List<Resource> resourceList = resourceService.getResourceList(admin);
-        List<Menu> menuList = resourceService.getMenuList(resourceList);
+        List<Menu> menuList = resourceService.getMenuList(resourceList,0);
+        model.addAttribute("menuList",menuList);
         return "index";
     }
 

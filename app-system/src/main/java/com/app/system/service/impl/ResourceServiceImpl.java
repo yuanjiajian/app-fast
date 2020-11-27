@@ -51,7 +51,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     @Transactional
     public void delete(List<Integer> ids) {
         this.removeByIds(ids);
-        roleResourceService.remove(new QueryWrapper<RoleResource>().in("resource_id",ids));
+        roleResourceService.remove(new QueryWrapper<RoleResource>().in("resource_id", ids));
         List<Resource> resourceList = this.list(new QueryWrapper<Resource>().in("parent_id", ids));
         if (CollUtil.isNotEmpty(resourceList)) {
             List<Integer> idList = resourceList.stream().map(Resource::getId).collect(Collectors.toList());
@@ -94,7 +94,19 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
-    public List<Menu> getMenuList(List<Resource> resourceList) {
-        return null;
+    public List<Menu> getMenuList(List<Resource> resourceList, Integer parentId) {
+        List<Menu> menuList = new ArrayList<>();
+        for (Resource resource : resourceList) {
+            Integer id = resource.getId();
+            Integer pid = resource.getParentId();
+            if (parentId == pid) {
+                List<Menu> list = this.getMenuList(resourceList, id);
+                Menu menu = new Menu();
+                BeanUtil.copyProperties(resource, menu);
+                menu.setChildrenMenu(list);
+                menuList.add(menu);
+            }
+        }
+        return menuList;
     }
 }
