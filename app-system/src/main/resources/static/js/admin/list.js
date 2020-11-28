@@ -26,12 +26,30 @@ $('#table').bootstrapTable({
         return temp;
     },                                   // 传递参数
     responseHandler: function (response) {
-        var {data} = response
-        var temp = {
-            total: data.total,
-            rows: data.records
+        var {code, message,data} = response
+        if (code == '0') {
+            var temp = {
+                total: data.total,
+                rows: data.records
+            }
+            return temp;
+        } else {
+            $.confirm({
+                title: '',
+                content: message,
+                type: 'red',
+                typeAnimated: true,
+                buttons: {
+                    tryAgain: {
+                        isHidden:true,
+                    },
+                    close: {
+                        isHidden:true,
+                    }
+                }
+            });
         }
-        return temp;
+
     },
     sidePagination: "server",            // 分页方式：client客户端分页，server服务端分页
     pageNumber: 1,                       // 初始化加载第一页，默认第一页

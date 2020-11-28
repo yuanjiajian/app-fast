@@ -75,10 +75,12 @@ CREATE TABLE `resource` (
 -- ----------------------------
 -- Records of resource
 -- ----------------------------
-INSERT INTO `resource` VALUES ('1', '0', '权限管理', '', '0', 'mdi-lock', '0', '0', '0', '2020-10-31 20:08:20', '2020-10-31 21:15:44');
-INSERT INTO `resource` VALUES ('2', '1', '管理员列表', '/admin/list.html', '1', 'mdi-account', '0', '0', '0', '2020-10-31 20:47:39', '2020-10-31 21:11:59');
-INSERT INTO `resource` VALUES ('3', '1', '角色列表', '/role/list.html', '1', 'mdi-account-multiple', '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
-INSERT INTO `resource` VALUES ('4', '1', '资源列表', '/resource/list.html', '1', 'mdi-menu', '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
+INSERT INTO `resource` VALUES ('1', '0', '首页', '/index.html', '0', 'mdi-home', '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
+INSERT INTO `resource` VALUES ('2', '1', '欢迎页', '/main.html', '1', 'mdi-human-greeting', '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
+INSERT INTO `resource` VALUES ('3', '0', '权限管理', '', '0', 'mdi-lock', '0', '0', '0', '2020-10-31 20:08:20', '2020-10-31 21:15:44');
+INSERT INTO `resource` VALUES ('4', '3', '管理员列表', '/admin/list.html', '1', 'mdi-account', '0', '0', '0', '2020-10-31 20:47:39', '2020-10-31 21:11:59');
+INSERT INTO `resource` VALUES ('5', '3', '角色列表', '/role/list.html', '1', 'mdi-account-multiple', '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
+INSERT INTO `resource` VALUES ('6', '3', '资源列表', '/resource/list.html', '1', 'mdi-menu', '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
 
 -- ----------------------------
 -- Table structure for role

@@ -9,8 +9,26 @@ function loadData() {
         url: ctxPath + 'resource/selectAll',
         dataType: 'json',
         success: function (response) {
-            var {data} = response
-            list = data
+            var {code, message, data} = response
+            if (code == '0') {
+                list = data
+            } else {
+                $.confirm({
+                    title: '',
+                    content: message,
+                    type: 'red',
+                    typeAnimated: true,
+                    buttons: {
+                        tryAgain: {
+                            isHidden: true,
+                        },
+                        close: {
+                            isHidden: true,
+                        }
+                    }
+                });
+            }
+
         }
     })
     return list;
