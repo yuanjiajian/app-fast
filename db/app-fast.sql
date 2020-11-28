@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50729
 File Encoding         : 65001
 
-Date: 2020-10-31 21:19:20
+Date: 2020-11-28 11:23:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,11 +47,12 @@ CREATE TABLE `admin_role` (
   `admin_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admin_role
 -- ----------------------------
+INSERT INTO `admin_role` VALUES ('1', '1', '1');
 
 -- ----------------------------
 -- Table structure for resource
@@ -70,7 +71,7 @@ CREATE TABLE `resource` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of resource
@@ -111,8 +112,14 @@ CREATE TABLE `role_resource` (
   `role_id` int(11) NOT NULL,
   `resource_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_resource
 -- ----------------------------
+INSERT INTO `role_resource` VALUES ('1', '1', '1');
+INSERT INTO `role_resource` VALUES ('2', '1', '2');
+INSERT INTO `role_resource` VALUES ('3', '1', '3');
+INSERT INTO `role_resource` VALUES ('4', '1', '4');
+INSERT INTO `role_resource` VALUES ('5', '1', '5');
+INSERT INTO `role_resource` VALUES ('6', '1', '6');
