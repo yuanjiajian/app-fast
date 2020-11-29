@@ -51,11 +51,11 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             }
         } else {
             if (this.isAuth(admin)) {
-                response.sendRedirect("login.html");
+                response.sendRedirect(request.getContextPath()+"/login.html");
                 return false;
             }
             if (this.isPermission(path, resourceList)) {
-                response.sendRedirect("login.html");
+                response.sendRedirect(request.getContextPath()+"/login.html");
                 return false;
             }
         }
