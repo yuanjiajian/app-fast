@@ -37,31 +37,30 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
         List<Resource> resourceList = resourceService.getResourceList(admin);
         String path = request.getServletPath();
         response.setCharacterEncoding("UTF-8");
-        PrintWriter writer = response.getWriter();
         if (isAjaxRequest) {
             if (this.isAuth(admin)) {
+                PrintWriter writer = response.getWriter();
                 writer.write(JSONUtil.toJsonStr(Result.fail(ResultEnum.UNAUTHORIZED.getCode(), ResultEnum.UNAUTHORIZED.getDesc())));
                 writer.close();
                 return false;
             }
             if (this.isPermission(path, resourceList)) {
+                PrintWriter writer = response.getWriter();
                 writer.write(JSONUtil.toJsonStr(Result.fail(ResultEnum.NO_PERMISSION.getCode(), ResultEnum.NO_PERMISSION.getDesc())));
                 writer.close();
                 return false;
             }
         } else {
             if (this.isAuth(admin)) {
-                response.sendRedirect(request.getContextPath()+"/login.html");
+                response.sendRedirect(request.getContextPath() + "/login.html");
                 return false;
             }
             if (this.isPermission(path, resourceList)) {
-                response.sendRedirect(request.getContextPath()+"/login.html");
+                response.sendRedirect(request.getContextPath() + "/login.html");
                 return false;
             }
         }
         return true;
-
-
     }
 
     /**

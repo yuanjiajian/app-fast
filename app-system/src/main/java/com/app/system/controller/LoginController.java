@@ -42,6 +42,7 @@ public class LoginController {
     }
 
     @GetMapping("/captcha")
+    @ResponseBody
     public void captcha() throws IOException {
         ICaptcha captcha = CaptchaUtil.createCircleCaptcha(120, 38, 4, 20);
         String code = captcha.getCode();
