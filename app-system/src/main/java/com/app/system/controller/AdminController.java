@@ -23,6 +23,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotBlank;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,6 +38,7 @@ import java.util.List;
  * @since 2020-10-23
  */
 @Controller
+@Validated
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -47,6 +50,9 @@ public class AdminController {
 
     @Autowired
     private UploadService uploadService;
+
+    @Autowired
+    private HttpSession session;
 
     @GetMapping("/list.html")
     public String list() {
@@ -68,6 +74,11 @@ public class AdminController {
         List<Role> roleList = roleService.list();
         model.addAttribute("roleList", roleList);
         return "admin/edit";
+    }
+
+    @GetMapping("/edit_pwd.html")
+    public String edit_pwd(){
+        return "admin/edit_pwd";
     }
 
     @GetMapping("/list")
@@ -122,6 +133,15 @@ public class AdminController {
     public Result update_status(@RequestParam("ids") List<Integer> ids, Integer status) {
         List<Admin> adminList = adminService.update_status(ids, status);
         return Result.success(adminList);
+    }
+
+    @PostMapping("/update_password")
+    @ResponseBody
+    public Result update_password(@NotBlank(message = "密码不能为空") String password){
+        Admin admin = (Admin) session.getAttribute("admin");
+        admin.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+        adminService.updateById(admin);
+        return Result.success();
     }
 
     @PostMapping("/upload_avatar")

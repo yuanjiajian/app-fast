@@ -26,6 +26,7 @@ public class IndexController {
         List<Resource> resourceList = resourceService.getResourceList(admin);
         List<Menu> menuList = resourceService.getMenuList(resourceList,0);
         model.addAttribute("menuList",menuList);
+        model.addAttribute("admin",admin);
         return "index";
     }
 

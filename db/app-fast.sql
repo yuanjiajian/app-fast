@@ -87,24 +87,26 @@ INSERT INTO `resource` VALUES ('8', '4', '管理员删除', '/admin/delete', '2'
 INSERT INTO `resource` VALUES ('9', '4', '管理员修改', '/admin/update', '2', NULL, '0', '0', '0', '2020-10-31 20:47:39', '2020-10-31 21:11:59');
 INSERT INTO `resource` VALUES ('10', '4', '管理员修改状态', '/admin/update_status', '2', NULL, '0', '0', '0', '2020-10-31 20:47:39', '2020-10-31 21:11:59');
 INSERT INTO `resource` VALUES ('11', '4', '管理员上传头像', '/admin/upload_avatar', '2', NULL, '0', '0', '0', '2020-10-31 20:47:39', '2020-10-31 21:11:59');
+INSERT INTO `resource` VALUES ('12', '4', '管理员修改密码页', '/admin/edit_pwd.html', '2', NULL, '0', '0', '0', '2020-10-31 20:47:39', '2020-10-31 21:11:59');
+INSERT INTO `resource` VALUES ('13', '4', '管理员修改密码', '/admin/update_password', '2', NULL, '0', '0', '0', '2020-10-31 20:47:39', '2020-10-31 21:11:59');
 
 
-INSERT INTO `resource` VALUES ('12', '3', '角色列表', '/role/list.html', '1', 'mdi-account-multiple', '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
-INSERT INTO `resource` VALUES ('13', '12', '角色查询列表', '/role/list', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
-INSERT INTO `resource` VALUES ('14', '12', '角色编辑', '/role/edit.html', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
-INSERT INTO `resource` VALUES ('15', '12', '角色添加', '/role/add', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
-INSERT INTO `resource` VALUES ('16', '12', '角色删除', '/role/delete', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
-INSERT INTO `resource` VALUES ('17', '12', '角色修改', '/role/update', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
-INSERT INTO `resource` VALUES ('18', '12', '角色修改状态', '/role/update_status', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
+INSERT INTO `resource` VALUES ('14', '3', '角色列表', '/role/list.html', '1', 'mdi-account-multiple', '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
+INSERT INTO `resource` VALUES ('15', '14', '角色查询列表', '/role/list', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
+INSERT INTO `resource` VALUES ('16', '14', '角色编辑', '/role/edit.html', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
+INSERT INTO `resource` VALUES ('17', '14', '角色添加', '/role/add', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
+INSERT INTO `resource` VALUES ('18', '14', '角色删除', '/role/delete', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
+INSERT INTO `resource` VALUES ('19', '14', '角色修改', '/role/update', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
+INSERT INTO `resource` VALUES ('20', '14', '角色修改状态', '/role/update_status', '2', NULL, '0', '0', '0', '2020-10-31 20:50:25', '2020-10-31 20:50:25');
 
 
-INSERT INTO `resource` VALUES ('19', '3', '资源列表', '/resource/list.html', '1', 'mdi-menu', '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
-INSERT INTO `resource` VALUES ('20', '19', '资源查询全部', '/resource/selectAll', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
-INSERT INTO `resource` VALUES ('21', '19', '资源编辑', '/resource/edit.html', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
-INSERT INTO `resource` VALUES ('22', '19', '资源添加', '/resource/add', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
-INSERT INTO `resource` VALUES ('23', '19', '资源删除', '/resource/delete', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
-INSERT INTO `resource` VALUES ('24', '19', '资源修改', '/resource/update', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
-INSERT INTO `resource` VALUES ('25', '19', '资源修改状态', '/resource/update_status', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
+INSERT INTO `resource` VALUES ('21', '3', '资源列表', '/resource/list.html', '1', 'mdi-menu', '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
+INSERT INTO `resource` VALUES ('22', '21', '资源查询全部', '/resource/selectAll', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
+INSERT INTO `resource` VALUES ('23', '21', '资源编辑', '/resource/edit.html', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
+INSERT INTO `resource` VALUES ('24', '21', '资源添加', '/resource/add', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
+INSERT INTO `resource` VALUES ('25', '21', '资源删除', '/resource/delete', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
+INSERT INTO `resource` VALUES ('26', '21', '资源修改', '/resource/update', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
+INSERT INTO `resource` VALUES ('27', '21', '资源修改状态', '/resource/update_status', '2', NULL, '0', '0', '0', '2020-10-31 20:53:42', '2020-10-31 20:53:42');
 
 -- ----------------------------
 -- Table structure for role
@@ -165,3 +167,5 @@ INSERT INTO `role_resource` VALUES ('22', '1', '22');
 INSERT INTO `role_resource` VALUES ('23', '1', '23');
 INSERT INTO `role_resource` VALUES ('24', '1', '24');
 INSERT INTO `role_resource` VALUES ('25', '1', '25');
+INSERT INTO `role_resource` VALUES ('26', '1', '26');
+INSERT INTO `role_resource` VALUES ('27', '1', '27');
