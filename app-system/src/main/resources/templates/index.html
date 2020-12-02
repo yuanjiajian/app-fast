@@ -34,7 +34,7 @@
             <li th:each="menu:${menuList}" class=""th:classappend="${#lists.isEmpty(menu.childrenMenu)}?'nav-item':'nav-item nav-item-has-subnav'">
               <a th:href="@{${menu.type==0?'javascript:void(0)':menu.url}}"><i class=""th:classappend="${menu.icon} ? 'mdi '+${menu.icon} : '' "></i> <span th:text="${menu.name}"></span></a>
               <ul th:if="${!#lists.isEmpty(menu.childrenMenu)}" class="nav nav-subnav">
-                <li th:each="m:${menu.childrenMenu}"> <a class="multitabs" th:href="@{${m.type==1&&m.url!=''?m.url:''}}" th:text="${m.name}"></a> </li>
+                <li th:each="m:${menu.childrenMenu}" th:if="${m.type==1}"> <a class="multitabs" th:href="@{${m.type==1&&m.url!=''?m.url:''}}" th:text="${m.name}"></a> </li>
               </ul>
             </li>
 

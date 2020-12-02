@@ -3,13 +3,14 @@ var ids = [];
 $("input[name='resourceList']").each(function (index, item) {
     ids.push($(item).val());
 });
+
 var test = $('.lyear-dropdown-tree').lyearDropdownTree({
     data: data,
     multiSelect: true,
     jsonStr: ',',
     selectedData: ids,
-    relationParent: true,
-    relationChildren: true,
+    relationParent: false,
+    relationChildren: false,
 
     checkHandler: function (el) {
         //console.log("checked ", el);
